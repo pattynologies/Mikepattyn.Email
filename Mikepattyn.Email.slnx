@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Mikepattyn.Email/Mikepattyn.Email.csproj" />
+  <Project Path="Mikepattyn.Email.Tests/Mikepattyn.Email.Tests.csproj" />
+</Solution>
