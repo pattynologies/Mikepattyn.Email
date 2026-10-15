@@ -1,0 +1,40 @@
+name: Publish NuGet
+
+on:
+  push:
+    tags:
+      - v*
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68
+        with:
+          dotnet-version: 10.0.x
+          source-url: https://nuget.pkg.github.com/pattynologies/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Test
+        run: dotnet test Mikepattyn.Email.slnx --configuration Release
+
+      - name: Pack
+        shell: bash
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          dotnet pack Mikepattyn.Email/Mikepattyn.Email.csproj \
+            --configuration Release \
+            -p:PackageVersion="$version" \
+            --output ./artifacts
+
+      - name: Publish
+        run: dotnet nuget push ./artifacts/*.nupkg

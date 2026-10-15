@@ -4,6 +4,11 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>Mikepattyn.Email</PackageId>
+    <Authors>Mike Pattyn</Authors>
+    <Description>.NET 10 library for rendering file-based email templates and sending them over SMTP with MailKit. The SMTP password can come from an environment variable or from AWS Secrets Manager.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/pattynologies/Mikepattyn.Email</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
